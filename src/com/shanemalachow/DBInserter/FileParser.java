@@ -22,7 +22,7 @@ public class FileParser {
 		}
 	}
 
-	public String[] readEntry() {
+	public String[] next() {
 		if (!scnr.hasNext()) {
 			return null;
 		}

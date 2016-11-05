@@ -131,7 +131,7 @@ public class MainGUI extends JFrame {
 	}
 
 	public void insert() {
-		main.login(userField.getText(), passField.getPassword());
-		main.insertData(pathField.getText(), tableField.getText(), fileField.getText(), delimiterField.getText());
+		if (main.login(pathField.getText(), userField.getText(), passField.getPassword()))
+			main.insertData(tableField.getText(), fileField.getText(), delimiterField.getText());
 	}
 }

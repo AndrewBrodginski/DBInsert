@@ -1,5 +1,7 @@
 package com.shanemalachow.DBInserter;
 
+import java.sql.SQLException;
+
 import javax.swing.JFrame;
 
 public class Controller {
@@ -9,19 +11,27 @@ public class Controller {
 
 	public Controller() {
 		frame = new MainGUI(this);
-		db = new DBInterface();
+		db = null;
 	}
 
-	public boolean insertData(String db, String table, String file, String delim) {
+	public boolean insertData(String table, String file, String delim) {
 		FileParser in = new FileParser(this, file, delim);
 		while (in.hasNext()) {
-
+			String[] data = in.next();
 		}
 		return false;
 	}
 
-	public void login(String user, char[] pass) {
-
+	public boolean login(String db, String user, char[] pass) {
+		try {
+			this.db = new DBInterface(db, user, pass);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			print("Unexpected SQL Exception.");
+			print("Login Failed.");
+			return false;
+		}
 	}
 
 	public void print(String s) {
