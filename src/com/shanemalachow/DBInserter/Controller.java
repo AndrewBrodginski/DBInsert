@@ -1,5 +1,6 @@
 package com.shanemalachow.DBInserter;
 
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
@@ -15,11 +16,28 @@ public class Controller {
 	}
 
 	public boolean insertData(String table, String file, String delim) {
-		FileParser in = new FileParser(this, file, delim);
-		while (in.hasNext()) {
-			String[] data = in.next();
+		FileParser in;
+		try {
+			in = new FileParser(file, delim);
+
+			int x = 1;
+			while (in.hasNext()) {
+				String[] data = in.next();
+				try {
+					db.insert(data, table);
+				} catch (SQLException e) {
+					e.printStackTrace();
+					print("Error inserting entry " + x);
+				}
+				x++;
+			}
+			print(String.format("Finished inserting. Encountered %d entries", x));
+			return true;
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			print("File does not exist.");
+			return false;
 		}
-		return false;
 	}
 
 	public boolean login(String db, String user, char[] pass) {
