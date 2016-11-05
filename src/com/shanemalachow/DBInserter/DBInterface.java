@@ -29,9 +29,9 @@ public class DBInterface {
 		preparedStatement.setString(1, table);
 		for (int x = 2; x <= data.length; x++) {
 			//TODO: Handle more data types other than int, double, and string.
-			if (data[x - 2].matches("(0-9)+")) {
+			if (data[x - 2].matches("[0-9]+")) {
 				preparedStatement.setInt(x, Integer.parseInt(data[x - 2]));
-			} else if (data[x - 1].matches("(0-9)+.(0-9)+")) {
+			} else if (data[x - 1].matches("[0-9]+.[0-9]+")) {
 				preparedStatement.setDouble(x, Double.parseDouble(data[x - 2]));
 			} else {
 				preparedStatement.setString(x, data[x - 2]);
