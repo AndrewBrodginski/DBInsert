@@ -11,10 +11,36 @@ public class DBInterface {
 	private Connection conn;
 	private Controller main;
 
+	/**
+	 * Standard constructor for the Interface.
+	 *
+	 * @param db
+	 * 		The database the user is attempting to access
+	 * @param user
+	 * 		The user login ID
+	 * @param pass
+	 * 		The users password for the database
+	 * @throws SQLException
+	 * 		Thrown if the information on a database access error or other errors. 
+	 */
+	
 	public DBInterface(String db, String user, char[] pass) throws SQLException {
 		this.db = db;
 		conn = DriverManager.getConnection(db, user, new String(pass));
 	}
+	
+	/**
+	 * Generates SQL statements for the database.
+	 * 
+	 * @param data
+	 * 		The data that is being inserted into the database
+	 * @param table
+	 * 		Name of the able where data is being inserted into the table
+	 * @return
+	 * 		A true of false, indicating that your sql statement was generated 
+	 * @throws SQLException
+	 * 		Thrown if the information on a database access error or other errors. 
+	 */
 
 	public boolean insert(String[] data, String table) throws SQLException {
 		String s = statement;
@@ -40,6 +66,15 @@ public class DBInterface {
 		preparedStatement.executeQuery();
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @param user
+	 * 		The user login ID
+	 * @param pass
+	 * 		The users password for the database
+	 * @return
+	 */
 
 	public boolean login(String user, char[] pass) {
 		return false;
